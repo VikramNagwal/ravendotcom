@@ -9,18 +9,21 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-email/components": "^0.0.21",
     "@workos-inc/node": "^7.11.4",
     "bcryptjs": "^2.4.3",
     "mongoose": "^8.4.4",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "resend": "^3.4.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cypress": "^13.13.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "postcss": "^8",

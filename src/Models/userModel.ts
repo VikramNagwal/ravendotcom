@@ -55,7 +55,7 @@ if(!this.isModified('password')) return next()
     } catch (error) {
         return console.log("Error hashing password: ", error)
     }
-});
+ });
 
 userSchema.methods.comparePassword = function(enteredPassword: string) {
     return bcrypt.compareSync(enteredPassword, this.password)
