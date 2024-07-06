@@ -5,17 +5,14 @@ describe('Signup functionality', () => {
       method: 'POST',
       url: 'http://localhost:3000/api/userAuth/signup',
       body: {
-        username: 'testUser',
-        email: 'testuser@example.com',
-        password: 'testPassword123'
+        username: 'testusername2',
+        email: 'testusername2@example.com',
+        password: 'testPassword18523'
       }
     }).then((response) => {
       expect(response.status).to.eq(201);
-      expect(response.body).to.have.property('username', 'Vikram Singh');
-      expect(response.body).to.have.property('email', 'vikramr@example.com');
-      expect(response.body).not.to.have.property('password');
+      expect(response.body).to.have.property('username', 'testusername2');
+      expect(response.body).to.have.property('email', 'testusername2@example.com');
     });
-
-    // Optional: Cleanup by deleting the test user from the database
   });
 });

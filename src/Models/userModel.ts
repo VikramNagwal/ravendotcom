@@ -44,12 +44,10 @@ const userSchema = new Schema({
 
 // methods and pre
 userSchema.pre<IUser>('save', function(this: IUser,next) {
-if(!this.isModified('password')) return next()
-   
+if(!this.isModified('password')) return next()  
     try {
         const salt = bcrypt.genSaltSync(20)
         const hashedPassword = bcrypt.hashSync(this.password, salt);
-
         this.password = hashedPassword
         return next()
     } catch (error) {

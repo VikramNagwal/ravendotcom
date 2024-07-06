@@ -1,5 +1,6 @@
 import { dbConnect } from '@/db/dbConfig'
 import { User } from '@/Models/userModel'
+import { emailSender } from '@/utils/emailSender'
 import {NextRequest, NextResponse} from 'next/server'
 
 dbConnect()
@@ -17,18 +18,31 @@ export async function POST(request: NextRequest) {
           // for development purpose
           console.log(reqBody)
 
+          const userExists = await User.findOne({
+               $or: [{username}, {email}]
+          })
+
+          if(userExists) {
+               return NextResponse.json({"error": "User already exists"}, {status: 400})
+          }
+
           const newUser = new User({
                username,
                email,
                password
           })
+
+          console.log(newUser)
           
           const savedUser = await newUser.save()
-          return NextResponse.json(savedUser, {status: 201})
+          console.log(savedUser)
 
-     } catch (error) {
+          await emailSender(email, username)
+          return NextResponse.json({"message": "user created successfully", "success": true, savedUser}, {status: 201})
+
+     } catch (error: any) {
           console.log("Signup failed: ", error)
-          return NextResponse.json({"error": "Signup failed, please try again later"}, {status: 500})
+          return NextResponse.json({"error": error.message}, {status: 500})
      }
 
 
